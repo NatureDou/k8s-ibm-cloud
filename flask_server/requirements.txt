@@ -1,0 +1,7 @@
+torch
+torchvision
+flask
+waitress # for production
+Pillow # for client test
+requests # for client test
+argparse # for testing flask server

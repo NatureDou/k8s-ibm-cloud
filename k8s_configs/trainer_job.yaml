@@ -1,0 +1,36 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: mnist-trainer
+spec:
+  template:
+    metadata:
+      labels:
+        job-type: trainer
+    spec:
+      restartPolicy: Never
+      containers:
+      - image: us.icr.io/florence-nyu/mnist-train:1
+        args: 
+        imagePullPolicy: Always
+        name: mnist-trainer-job
+        # volumeMounts:
+        #  - name:
+      imagePullSecrets:
+      - name: all-icr-io
+      dnsPolicy: ClusterFirst
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+               matchExpressions:
+                  - key: "job-type"
+                    operator: In
+                    values:
+                      - trainer
+              topologyKey: "kubernetes.io/hostname"
+
+      #volumes:
+      #- name: 
+      #  persistentVolumeClaim:
+      #    claimName:

@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  generation: 1
+  labels:
+    app: flasknode
+  name: flask-node-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flasknode
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: flasknode
+    spec:
+      containers:
+      - image: private.us.icr.io/florence-nyu/mnist_app:1
+        imagePullPolicy: Always
+        name: mnist-inference
+        ports:
+        - containerPort: 5000
+          protocol: TCP
+      imagePullSecrets:
+      - name: all-icr-io
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
