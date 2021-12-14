@@ -1,4 +1,4 @@
-FROM python:3
+FROM kumatea/pytorch:latest
 
 RUN apt-get update && pip install --upgrade pip
 
@@ -7,7 +7,7 @@ WORKDIR /mnist_app
 
 COPY * ./
 
-RUN pip3 install -r requirements.txt
+RUN pip install -r requirements.txt
 
 
 # RUN python3 train.py --epochs=1
