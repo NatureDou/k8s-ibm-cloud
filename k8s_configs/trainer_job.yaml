@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: mnist-trainer
+  name: k8s-train
 spec:
   template:
     metadata:
@@ -10,10 +10,10 @@ spec:
     spec:
       restartPolicy: Never
       containers:
-      - image: us.icr.io/florence-nyu/mnist-train:1
+      - image: icr.io/2021-fall-student-bd2119/k8s-train:1
         args: 
         imagePullPolicy: Always
-        name: mnist-trainer-job
+        name: k8s-train
         # volumeMounts:
         #  - name:
       imagePullSecrets:

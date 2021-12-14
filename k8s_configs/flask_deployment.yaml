@@ -21,9 +21,9 @@ spec:
         app: flasknode
     spec:
       containers:
-      - image: private.us.icr.io/florence-nyu/mnist_app:1
+      - image: private.icr.io/2021-fall-student-bd2119/k8s-infer:1
         imagePullPolicy: Always
-        name: mnist-inference
+        name: k8s-infer
         ports:
         - containerPort: 5000
           protocol: TCP
